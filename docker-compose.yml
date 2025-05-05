@@ -1,0 +1,25 @@
+
+services:
+  db:
+    image: mariadb
+    container_name: myproject-mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: myproject
+      MYSQL_DATABASE: myprojectdb
+      MYSQL_USER: myproject
+      MYSQL_PASSWORD: myproject1!
+    ports:
+      - "3308:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+  python-runner:
+    image: python:3.10-slim
+    container_name: python-runner-local-new
+    working_dir: /app
+    volumes:
+      - ./scripts:/app/scripts
+    command: [ "tail", "-f", "/dev/null" ]
+    restart: always
+
+volumes:
+  db_data:
