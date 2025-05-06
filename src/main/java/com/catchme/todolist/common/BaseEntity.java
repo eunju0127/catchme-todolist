@@ -38,8 +38,4 @@ public abstract class BaseEntity {
     @Column(name = "updated_at")
     @Comment("수정일자")
     private LocalDateTime updatedAt;
-
-    @Column(name = "deleted_at")
-    @Comment("삭제일자")
-    private LocalDateTime deletedAt;
 }
