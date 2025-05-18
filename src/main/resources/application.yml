@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: todolist
   datasource:
     url: jdbc:mariadb://localhost:3308/myprojectdb
     username: myproject

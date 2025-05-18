@@ -19,14 +19,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class BaseEntity {
 
-    @Column(name = "created_by", nullable = false, updatable = false)
-    @Comment("생성자")
-    private String createdBy;
-
-    @Column(name = "updated_by")
-    @Comment("수정자")
-    private String updatedBy;
-
     @CreatedDate
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "created_at", nullable = false, updatable = false)
