@@ -56,4 +56,15 @@ public class TodolistEntity extends BaseEntity {
     @Column(name = "is_deleted", nullable = false)
     @Comment("삭제 여부")
     private Boolean isDeleted;
+
+    public void update(String title, String description, LocalDate startDate, LocalDate dueDate) {
+        this.title = title;
+        this.description = description;
+        this.startDate = startDate;
+        this.dueDate = dueDate;
+    }
+
+    public void delete() {
+        this.isDeleted = true;
+    }
 }

@@ -36,5 +36,22 @@ public class TodolistService {
         .orElseThrow(() -> new EntityNotFoundException("해당 Todolist를 찾을 수 없습니다."));
         return todolistMapper.toDto(todolistEntity);
     }
+
+    @Transactional
+    public TodolistDto updateTodolist(Long id, TodolistDto todolistDto){
+        TodolistEntity todolistEntity = todolistRepository.findById(id)
+                        .orElseThrow(() -> new RuntimeException("할일을 찾을 수 없습니다."));
+        todolistEntity.update(todolistDto.getTitle(), todolistDto.getDescription(), todolistDto.getStartDate(), todolistDto.getDueDate());
+        todolistRepository.save(todolistEntity);
+        return todolistMapper.toDto(todolistEntity);
+    }
+
+    @Transactional
+    public void deleteTodolist(Long id){
+        TodolistEntity todolistEntity = todolistRepository.findById(id)
+                        .orElseThrow(()-> new EntityNotFoundException("할일이 존재하지 않습니다."));
+        todolistEntity.delete();
+        todolistRepository.save(todolistEntity);
+    }
 }
 
