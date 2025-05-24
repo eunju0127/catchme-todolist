@@ -1,16 +1,17 @@
 package com.catchme.todolist.todolist.api;
 
 import com.catchme.todolist.todolist.dto.TodolistDto;
-import com.catchme.todolist.todolist.entity.TodolistEntity;
 import com.catchme.todolist.todolist.service.TodolistService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,5 +44,20 @@ public class TodolistController {
     public ResponseEntity<TodolistDto> getTodolistById(@PathVariable Long id) {
         TodolistDto todolistDto = todolistService.findTodolistById(id);
         return ResponseEntity.ok(todolistDto);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "할일 수정")
+    public ResponseEntity<TodolistDto> updateTodolist(@PathVariable("id") Long Id,
+            @RequestBody @Valid TodolistDto todolistDto){
+        TodolistDto updatedTodolist = todolistService.updateTodolist(Id, todolistDto);
+        return ResponseEntity.ok(updatedTodolist);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "할일 삭제")
+    public ResponseEntity<Void> deleteTodolist(@PathVariable("id") Long id){
+        todolistService.deleteTodolist(id);
+        return ResponseEntity.noContent().build();
     }
 }
