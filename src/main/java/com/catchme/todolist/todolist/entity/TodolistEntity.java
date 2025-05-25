@@ -12,6 +12,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Comment;
 
@@ -45,9 +46,10 @@ public class TodolistEntity extends BaseEntity {
     @Comment("마감일")
     private LocalDate dueDate;
 
+    @Setter
     @Column(name = "is_completed", nullable = false)
     @Comment("완료 여부")
-    private Boolean isCompleted;
+    private Boolean isCompleted = false;
 
     @Column(name = "is_pinned", nullable = false)
     @Comment("즐겨찾기 여부")

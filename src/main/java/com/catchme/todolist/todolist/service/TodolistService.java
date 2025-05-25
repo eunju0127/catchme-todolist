@@ -56,5 +56,17 @@ public class TodolistService {
         todolistEntity.delete();
         todolistRepository.save(todolistEntity);
     }
+
+    @Transactional
+    public void completeTodolist(Long id) {
+        TodolistEntity todolistEntity = todolistRepository.findByIdAndIsDeletedFalse(id)
+                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 할일입니다."));
+
+        if (!todolistEntity.getIsCompleted()) {
+            todolistEntity.setIsCompleted(true);
+        }
+
+        todolistRepository.save(todolistEntity);
+    }
 }
 

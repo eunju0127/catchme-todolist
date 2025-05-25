@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -61,5 +62,12 @@ public class TodolistController {
         todolistService.deleteTodolist(id);
         Map<String, String> response = Map.of("message", "할 일이 성공적으로 삭제되었습니다.");
         return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/{id}/complete")
+    @Operation(summary = "할 일 완료 체크")
+    public ResponseEntity<Map<String, String>> completeTodolist(@PathVariable("id") Long id) {
+        todolistService.completeTodolist(id);
+        return ResponseEntity.ok(Map.of("message", "할 일이 완료되었습니다."));
     }
 }
