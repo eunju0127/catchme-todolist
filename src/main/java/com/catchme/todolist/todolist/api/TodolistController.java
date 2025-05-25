@@ -5,6 +5,7 @@ import com.catchme.todolist.todolist.service.TodolistService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -56,8 +57,9 @@ public class TodolistController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "할일 삭제")
-    public ResponseEntity<Void> deleteTodolist(@PathVariable("id") Long id){
+    public ResponseEntity<Map<String, String>> deleteTodolist(@PathVariable("id") Long id){
         todolistService.deleteTodolist(id);
-        return ResponseEntity.noContent().build();
+        Map<String, String> response = Map.of("message", "할 일이 성공적으로 삭제되었습니다.");
+        return ResponseEntity.ok(response);
     }
 }
