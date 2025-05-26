@@ -51,9 +51,10 @@ public class TodolistEntity extends BaseEntity {
     @Comment("완료 여부")
     private Boolean isCompleted = false;
 
+    @Setter
     @Column(name = "is_pinned", nullable = false)
     @Comment("즐겨찾기 여부")
-    private Boolean isPinned;
+    private Boolean isPinned = false;
 
     @Column(name = "is_deleted", nullable = false)
     @Comment("삭제 여부")
